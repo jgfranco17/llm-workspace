@@ -15,7 +15,7 @@ ENV OLLAMA_KEEP_ALIVE=5m
 ENV OLLAMA_NUM_GPU=1
 
 # Copy initialization script and custom Modelfile
-COPY --chmod=755 init-ollama.sh /usr/local/bin/init-ollama.sh
+COPY --chmod=755 scripts/init-ollama.sh /usr/local/bin/init-ollama.sh
 COPY Modelfile.custom /etc/ollama/Modelfile.custom
 
 # The default entrypoint from the base image will be preserved
