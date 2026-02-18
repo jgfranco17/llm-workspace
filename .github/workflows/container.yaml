@@ -28,7 +28,7 @@ jobs:
         id: image
         run: |
           VERSION=$(jq -r '.version' project.json)
-          IMAGE_NAME="ghcr.io/jgfranco17/llama-dev"
+          IMAGE_NAME="ghcr.io/${{ github.repository}}"
           echo "name=$IMAGE_NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 

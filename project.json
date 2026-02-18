@@ -2,5 +2,5 @@
   "owner": "Chino Franco",
   "name": "llm-workspace",
   "description": "A sandbox environment for testing customized LLMs and agents.",
-  "version": "0.2.0"
+  "version": "0.1.1"
 }
