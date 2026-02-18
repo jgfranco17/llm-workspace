@@ -1,12 +1,12 @@
 ---
 services:
-  llama-dev:
+  llm-workspace:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/jgfranco17/llama-dev:latest
+    image: ghcr.io/jgfranco17/llm-workspace:latest
     tty: true
-    container_name: llama-dev
+    container_name: llm-workspace
     runtime: nvidia
     ports:
       - "11434:11434"
