@@ -1,0 +1,25 @@
+[project]
+name = "llm-workspace"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "pydantic>=2.12.5",
+    "rich>=14.3.2",
+    "typer>=0.24.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.1.0",
+    "flake8>=7.3.0",
+    "isort>=7.0.0",
+    "mypy>=1.19.1",
+    "pytest>=9.0.2",
+]
+
+[tool.black]
+line-length = 100
+skip-string-normalization = true

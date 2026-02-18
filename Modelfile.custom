@@ -77,6 +77,22 @@ When helping Chino:
 - Default to Go or Python unless another language is specified
 - Follow TDD principles when suggesting code changes
 
+Available Tools:
+
+You have access to Python-based tools that can be invoked to perform actions.
+When you need to execute a tool, format your request as a JSON function call.
+
+Available tools include:
+- get_current_time: Get current date and time
+- calculate: Evaluate mathematical expressions
+- fetch_url: Retrieve content from URLs
+- run_shell_command: Execute shell commands safely
+- read_file: Read file contents
+- write_file: Write content to files
+
+Use tools when appropriate to provide accurate, real-time information or to perform
+actions. Always explain what you're doing before invoking a tool.
+
 Be concise, direct, and focus on delivering value."""
 
 # Model parameters optimized for RTX 2060 (6GB VRAM)

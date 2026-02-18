@@ -60,3 +60,33 @@ run model="llama-dev":  pull-model init
 # Show the custom model configuration
 show-custom:
     @docker exec ollama ollama show llama-dev
+
+# Run unit tests
+pytest *args:
+    @uv run pytest {{ args }}
+
+# Lint the workspace
+lint:
+    @uv run black .
+    @uv run isort .
+
+# List all available Python tools
+tools-list:
+    @echo "Available Python tools:"
+    @docker exec ollama /toolbox/.venv/bin/python3 /toolbox/cli.py list
+
+# Show detailed info about a specific tool
+tools-info tool:
+    @docker exec ollama /toolbox/.venv/bin/python3 /toolbox/cli.py info {{ tool }}
+
+# Execute a Python tool
+tools-exec tool *args:
+    @docker exec ollama /toolbox/.venv/bin/python3 /toolbox/cli.py execute {{ tool }} {{ args }}
+
+# Export tool schemas in Ollama format
+tools-schema:
+    @docker exec ollama /toolbox/.venv/bin/python3 /toolbox/cli.py schema
+
+# Run Python tools tests
+tools-test:
+    @docker exec ollama sh -c "cd /toolbox && .venv/bin/python3 -m pytest"

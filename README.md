@@ -5,7 +5,8 @@ A customized Ollama environment with personalized context, configurable settings
 ## Features
 
 - **Personalized AI Assistant**: Custom model configured with your preferences
-- **Extended Context Window**: Default 8192 tokens (configurable)
+- **Python Tools Integration**: Built-in tool support with UV package manager
+- **Extended Context Window**: Default 4096 tokens (configurable, optimized for RTX 2060)
 - **GPU Support**: NVIDIA GPU acceleration enabled
 - **Auto-initialization**: Automatic model creation and configuration on startup
 - **Easy Management**: justfile commands for common operations
@@ -27,8 +28,8 @@ CUSTOM_MODEL_NAME=llama-dev
 BASE_MODEL=llama3
 
 # Ollama Runtime Configuration
-OLLAMA_NUM_CTX=8192
-OLLAMA_NUM_PARALLEL=4
+OLLAMA_NUM_CTX=4096
+OLLAMA_NUM_PARALLEL=1
 OLLAMA_MAX_LOADED_MODELS=1
 OLLAMA_KEEP_ALIVE=5m
 ```
@@ -59,6 +60,20 @@ just pull-model codellama
 # Stop the environment
 just down
 ```
+
+## Python Tools
+
+The agent has access to Python-based tools for enhanced capabilities.
+Available tools include:
+
+- **get_current_time**: Get current date and time
+- **calculate**: Evaluate mathematical expressions
+- **fetch_url**: Retrieve content from URLs
+- **run_shell_command**: Execute shell commands safely
+- **read_file**: Read file contents
+- **write_file**: Write content to files
+
+See [tools/README.md](tools/README.md) for detailed documentation and how to add new tools.
 
 ## Troubleshooting
 
