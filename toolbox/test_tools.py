@@ -1,8 +1,9 @@
 """Tests for Python tools."""
 
 import pytest
-import tools  # noqa: F401 - Import to trigger tool registration
 from registry import tool_registry
+
+import toolbox  # noqa: F401 - Import to trigger tool registration
 
 
 def test_get_current_time():
