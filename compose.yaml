@@ -1,10 +1,12 @@
 ---
 services:
-  ollama:
+  llama-dev:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ollama
+    image: ghcr.io/jgfranco17/llama-dev:latest
+    tty: true
+    container_name: llama-dev
     runtime: nvidia
     ports:
       - "11434:11434"
