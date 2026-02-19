@@ -1,0 +1,63 @@
+{
+  "tools": [
+    {
+      "name": "get_current_time",
+      "description": "Get the current date and time in ISO 8601 format",
+      "parameters": {}
+    },
+    {
+      "name": "fetch_url",
+      "description": "Fetch content from a URL (first 1000 characters)",
+      "parameters": {
+        "url": {
+          "type": "string",
+          "description": "URL to fetch",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "run_shell_command",
+      "description": "Execute a shell command in a safe environment",
+      "parameters": {
+        "command": {
+          "type": "string",
+          "description": "Shell command to execute",
+          "required": true
+        },
+        "workdir": {
+          "type": "string",
+          "description": "Working directory for the command",
+          "required": false
+        }
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Read contents of a file (max 100KB)",
+      "parameters": {
+        "filepath": {
+          "type": "string",
+          "description": "Path to the file to read",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Write content to a file",
+      "parameters": {
+        "filepath": {
+          "type": "string",
+          "description": "Path to the file to write",
+          "required": true
+        },
+        "content": {
+          "type": "string",
+          "description": "Content to write to the file",
+          "required": true
+        }
+      }
+    }
+  ]
+}

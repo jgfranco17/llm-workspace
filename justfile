@@ -33,16 +33,16 @@ logs service="":
 # Pull Ollama model manually
 pull-model model="llama3":
     @echo "Pulling Ollama model: {{ model }}"
-    @docker exec ollama ollama pull {{ model }}
+    @docker exec llm-workspace ollama pull {{ model }}
 
 # Initialize Ollama with custom configuration
 init:
     @echo "Running Ollama initialization..."
-    @docker exec ollama /usr/local/bin/init-ollama.sh
+    @docker exec llm-workspace /usr/local/bin/init-ollama.sh
 
 # List currently loaded models
 list-models:
-    @docker exec ollama ollama list
+    @docker exec llm-workspace ollama list
 
 # Check GPU status and availability
 gpu-check:
@@ -50,22 +50,13 @@ gpu-check:
     @nvidia-smi 2>/dev/null || echo "No NVIDIA GPU found on host"
     @echo ""
     @echo "Container GPU access:"
-    @docker exec ollama printenv | grep -i nvidia || echo "NVIDIA env vars not set"
-    @docker exec ollama ls -la /dev | grep -i nvidia 2>/dev/null || echo "No NVIDIA devices in container"
+    @docker exec llm-workspace printenv | grep -i nvidia || echo "NVIDIA env vars not set"
+    @docker exec llm-workspace ls -la /dev | grep -i nvidia 2>/dev/null || echo "No NVIDIA devices in container"
 
 # Run the custom personalized model
 run model="llama-dev":  pull-model init
-    @docker exec -it ollama ollama run {{ model }}
+    @docker exec -it llm-workspace ollama run {{ model }}
 
 # Show the custom model configuration
 show-custom:
-    @docker exec ollama ollama show llama-dev
-
-# Run unit tests
-pytest *args:
-    @uv run pytest {{ args }}
-
-# Lint the workspace
-lint:
-    @uv run black .
-    @uv run isort .
+    @docker exec llm-workspace ollama show llama-dev

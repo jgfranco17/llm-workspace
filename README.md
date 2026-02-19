@@ -5,7 +5,7 @@ A customized Ollama environment with personalized context, configurable settings
 ## Features
 
 - **Personalized AI Assistant**: Custom model configured with your preferences
-- **Python Tools Integration**: Built-in tool support with UV package manager
+- **Go Tools Integration**: Built-in tool support with a compiled tool runner
 - **Extended Context Window**: Default 4096 tokens (configurable, optimized for RTX 2060)
 - **GPU Support**: NVIDIA GPU acceleration enabled
 - **Auto-initialization**: Automatic model creation and configuration on startup
@@ -61,19 +61,18 @@ just pull-model codellama
 just down
 ```
 
-## Python Tools
+## Go Tools
 
-The agent has access to Python-based tools for enhanced capabilities.
+The agent has access to Go-based tools for enhanced capabilities.
 Available tools include:
 
 - **get_current_time**: Get current date and time
-- **calculate**: Evaluate mathematical expressions
 - **fetch_url**: Retrieve content from URLs
 - **run_shell_command**: Execute shell commands safely
 - **read_file**: Read file contents
 - **write_file**: Write content to files
 
-See [tools/README.md](tools/README.md) for detailed documentation and how to add new tools.
+See [toolbox/README.md](toolbox/README.md) for detailed documentation and how to add new tools.
 
 ## Troubleshooting
 
