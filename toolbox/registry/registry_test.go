@@ -104,7 +104,7 @@ func TestManagerOllamaSchemas(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	schemas := manager.OllamaSchemas()
+	schemas := manager.AsOllamaSchema()
 	if assert.Len(t, schemas, 1) {
 		assert.Equal(t, "function", schemas[0].Type)
 		assert.Equal(t, "tool", schemas[0].Function.Name)

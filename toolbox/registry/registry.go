@@ -8,10 +8,8 @@ import (
 	"github.com/jgfranco17/llm-workspace/toolbox/tools"
 )
 
-type Toolset map[string]config.ToolSchema
-
 type Manager struct {
-	tools    Toolset
+	tools    config.Toolset
 	order    []string
 	handlers tools.HandlerCollection
 }
@@ -21,7 +19,7 @@ func New(handlers tools.HandlerCollection) *Manager {
 		handlers = tools.DefaultHandlers()
 	}
 	return &Manager{
-		tools:    make(Toolset),
+		tools:    make(config.Toolset),
 		order:    []string{},
 		handlers: handlers,
 	}
@@ -29,7 +27,7 @@ func New(handlers tools.HandlerCollection) *Manager {
 
 func (m *Manager) Add(schemas ...config.ToolSchema) error {
 	for _, schema := range schemas {
-		if _, ok := m.handlers[schema.Name]; !ok {
+		if !m.handlers.Has(schema.Name) {
 			return fmt.Errorf("no handler registered for tool: %s", schema.Name)
 		}
 		if _, exists := m.tools[schema.Name]; exists {
@@ -58,7 +56,7 @@ func (m *Manager) GetHandler(name string) (config.ToolSchema, tools.Handler, boo
 	return schema, handler, true
 }
 
-func (m *Manager) OllamaSchemas() []config.OllamaFormat {
+func (m *Manager) AsOllamaSchema() []config.OllamaFormat {
 	schemas := make([]config.OllamaFormat, 0, len(m.order))
 	for _, name := range m.order {
 		schemas = append(schemas, m.tools[name].ToOllama())

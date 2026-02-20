@@ -9,11 +9,23 @@ type Handler func(ctx context.Context, params Parameters) (string, error)
 
 type HandlerCollection map[string]Handler
 
-func (c HandlerCollection) GetHandler(name string) (*Handler, error) {
+func (c HandlerCollection) Get(name string) (*Handler, error) {
 	if handler, ok := c[name]; ok {
 		return &handler, nil
 	}
 	return nil, fmt.Errorf("handler not found: %s", name)
+}
+
+func (c HandlerCollection) Has(name string) bool {
+	_, ok := c[name]
+	return ok
+}
+
+func (c HandlerCollection) Add(name string, handler Handler) {
+	if c == nil {
+		c = make(HandlerCollection)
+	}
+	c[name] = handler
 }
 
 func DefaultHandlers() HandlerCollection {

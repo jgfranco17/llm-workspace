@@ -98,7 +98,7 @@ func newSchemaCommand(state *appState) *cobra.Command {
 		Use:   "schema",
 		Short: "Export tool schemas in Ollama format",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			schemas := state.registry.OllamaSchemas()
+			schemas := state.registry.AsOllamaSchema()
 			payload, err := json.MarshalIndent(schemas, "", "  ")
 			if err != nil {
 				return fmt.Errorf("serialize schema: %w", err)

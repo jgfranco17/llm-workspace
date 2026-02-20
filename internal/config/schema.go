@@ -17,6 +17,8 @@ type ToolSchema struct {
 	Parameters  map[string]ToolParameter `json:"parameters"`
 }
 
+type Toolset map[string]ToolSchema
+
 type OllamaFormat struct {
 	Type     string         `json:"type"`
 	Function OllamaFunction `json:"function"`
