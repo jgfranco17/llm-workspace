@@ -18,7 +18,7 @@ func limitOutput(text string, limit int) string {
 	return text[:limit]
 }
 
-func getRequiredParam(_ context.Context, params map[string]string, key string) (string, error) {
+func getRequiredParam(_ context.Context, params Parameters, key string) (string, error) {
 	value, ok := params[key]
 	if !ok || strings.TrimSpace(value) == "" {
 		return "", fmt.Errorf("missing required parameter: %s", key)

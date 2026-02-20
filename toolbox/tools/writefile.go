@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-func WriteFile(ctx context.Context, params map[string]string) (string, error) {
+func WriteFile(ctx context.Context, params Parameters) (string, error) {
 	filepathValue, err := getRequiredParam(ctx, params, "filepath")
 	if err != nil {
 		return "", err

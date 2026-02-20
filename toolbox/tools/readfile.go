@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func ReadFile(ctx context.Context, params map[string]string) (string, error) {
+func ReadFile(ctx context.Context, params Parameters) (string, error) {
 	filepathValue, err := getRequiredParam(ctx, params, "filepath")
 	if err != nil {
 		return "", err

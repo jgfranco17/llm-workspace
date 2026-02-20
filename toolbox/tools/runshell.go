@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func RunShellCommand(ctx context.Context, params map[string]string) (string, error) {
+func RunShellCommand(ctx context.Context, params Parameters) (string, error) {
 	command, err := getRequiredParam(ctx, params, "command")
 	if err != nil {
 		return "", err

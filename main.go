@@ -13,6 +13,7 @@ import (
 
 	"github.com/jgfranco17/llm-workspace/internal/config"
 	"github.com/jgfranco17/llm-workspace/toolbox/registry"
+	"github.com/jgfranco17/llm-workspace/toolbox/tools"
 )
 
 type appState struct {
@@ -151,7 +152,7 @@ func newInfoCommand(state *appState) *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			toolName := args[0]
-			schema, _, ok := state.registry.GetTool(toolName)
+			schema, _, ok := state.registry.GetHandler(toolName)
 			if !ok {
 				return fmt.Errorf("tool '%s' not found", toolName)
 			}
@@ -182,8 +183,8 @@ func newInfoCommand(state *appState) *cobra.Command {
 	}
 }
 
-func parseParams(params []string) (map[string]string, error) {
-	result := make(map[string]string)
+func parseParams(params []string) (tools.Parameters, error) {
+	result := make(tools.Parameters)
 	for _, param := range params {
 		parts := strings.SplitN(param, "=", 2)
 		if len(parts) != 2 {

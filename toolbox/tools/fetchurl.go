@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func FetchURL(ctx context.Context, params map[string]string) (string, error) {
+func FetchURL(ctx context.Context, params Parameters) (string, error) {
 	url, err := getRequiredParam(ctx, params, "url")
 	if err != nil {
 		return "", err

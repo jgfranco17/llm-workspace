@@ -1,6 +1,0 @@
-[flake8]
-ignore = E226, E302, E41
-exclude = .tox, __pycache__, migrations/*, *venv*/
-max-line-length = 100
-max-complexity = 10
-statistics = True
