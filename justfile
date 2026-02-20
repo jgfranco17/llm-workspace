@@ -4,6 +4,20 @@
 _default:
     @just --list --unsorted
 
+# Build the tools binary for local use
+build-tools:
+    #!/usr/bin/env bash
+    echo "Building tools binary..."
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+        go build -o tool-runner .
+
+# Run tests for the toolbox
+test:
+    #!/usr/bin/env bash
+    echo "Running tests..."
+    go clean -testcache
+    go test -cover ./...
+
 # Setup NVIDIA Container Toolkit for GPU access
 setup-gpu:
     @echo "Setting up NVIDIA Container Toolkit..."
