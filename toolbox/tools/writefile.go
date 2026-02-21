@@ -11,12 +11,12 @@ import (
 // creating any missing parent directories. It returns a summary message
 // containing the number of bytes written and the destination path.
 func WriteFile(ctx context.Context, params Parameters) (string, error) {
-	filepathValue, err := getRequiredParam(ctx, params, "filepath")
+	filepathValue, err := params.Get("filepath")
 	if err != nil {
 		return "", err
 	}
 
-	content, err := getRequiredParam(ctx, params, "content")
+	content, err := params.Get("content")
 	if err != nil {
 		return "", err
 	}

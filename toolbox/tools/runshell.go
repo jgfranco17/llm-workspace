@@ -13,7 +13,7 @@ import (
 // given by params["workdir"], with a 30-second timeout. It returns stdout
 // on success or an error wrapping stderr on failure.
 func RunShellCommand(ctx context.Context, params Parameters) (string, error) {
-	command, err := getRequiredParam(ctx, params, "command")
+	command, err := params.Get("command")
 	if err != nil {
 		return "", err
 	}

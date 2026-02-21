@@ -13,7 +13,7 @@ import (
 // and returns the response body, truncated to MaxOutputSize bytes.
 // Only HTTPS URLs are accepted; non-2xx responses are treated as errors.
 func FetchURL(ctx context.Context, params Parameters) (string, error) {
-	url, err := getRequiredParam(ctx, params, "url")
+	url, err := params.Get("url")
 	if err != nil {
 		return "", err
 	}
