@@ -18,6 +18,9 @@ setup:
     go mod tidy
     echo "Workspace setup complete!"
 
+tool *args:
+    @go run . {{ args }}
+
 # Build the tools binary for local use
 build-tools:
     #!/usr/bin/env bash
