@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - "project.json"
+      - "specs.json"
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
       - name: Get image details
         id: image
         run: |
-          VERSION=$(jq -r '.version' project.json)
+          VERSION=$(jq -r '.version' specs.json)
           IMAGE_NAME="ghcr.io/${{ github.repository}}"
           echo "name=$IMAGE_NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT

@@ -18,9 +18,6 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 # context configuration and initialization capabilities.
 FROM ollama/ollama:${BASE_VERSION} AS model
 
-LABEL org.opencontainers.image.source="https://github.com/jgfranco17/llm-workspace"
-LABEL org.opencontainers.image.description="Sandbox environment for testing customized LLMs."
-
 # Set default environment variables for Ollama configuration
 # Optimized for RTX 2060 (6GB VRAM)
 # These can be overridden in compose.yaml or at runtime
@@ -48,3 +45,6 @@ ENV TOOL_LOG_LEVEL="INFO"
 # To run initialization after Ollama starts, use the healthcheck
 # or docker-compose depends_on to trigger init-ollama.sh
 FROM model AS app
+
+LABEL org.opencontainers.image.source=https://github.com/jgfranco17/llm-workspace
+LABEL org.opencontainers.image.description="Sandbox environment for testing customized LLMs."
