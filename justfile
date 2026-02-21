@@ -4,6 +4,20 @@
 _default:
     @just --list --unsorted
 
+# Set up workspace dependencies
+setup:
+    #!/usr/bin/env bash
+    echo "Setting up workspace dependencies..."
+    if [[ ! -f .envrc ]]; then
+        cp .envrc.example .envrc
+        echo "Created .envrc from example. Please review and customize it as needed."
+    else
+        echo "Found .envrc file, skipping creation."
+        echo "Run 'direnv allow' to load environment variables if you haven't already."
+    fi
+    go mod tidy
+    echo "Workspace setup complete!"
+
 # Build the tools binary for local use
 build-tools:
     #!/usr/bin/env bash
