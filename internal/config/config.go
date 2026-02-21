@@ -7,13 +7,18 @@ import (
 )
 
 const (
+	// DefaultConfigFile is the default filename for the tool configuration.
 	DefaultConfigFile string = "tools.json"
 )
 
+// Config holds the parsed tool definitions loaded from a config file.
 type Config struct {
 	Tools []ToolSchema `json:"tools"`
 }
 
+// Read decodes a JSON config from r and returns the resulting Config.
+// It returns an error if r is nil, the JSON is malformed, or no tools
+// are defined.
 func Read(configData io.Reader) (Config, error) {
 	if configData == nil {
 		return Config{}, fmt.Errorf("config data is required")

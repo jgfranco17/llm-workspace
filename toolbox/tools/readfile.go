@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+// ReadFile reads the file at params["filepath"] and returns its contents.
+// It rejects directories and files larger than MaxFileSize bytes.
 func ReadFile(ctx context.Context, params Parameters) (string, error) {
 	filepathValue, err := getRequiredParam(ctx, params, "filepath")
 	if err != nil {

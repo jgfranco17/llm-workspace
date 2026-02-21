@@ -7,6 +7,9 @@ import (
 	"path/filepath"
 )
 
+// WriteFile writes params["content"] to the file at params["filepath"],
+// creating any missing parent directories. It returns a summary message
+// containing the number of bytes written and the destination path.
 func WriteFile(ctx context.Context, params Parameters) (string, error) {
 	filepathValue, err := getRequiredParam(ctx, params, "filepath")
 	if err != nil {

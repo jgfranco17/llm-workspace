@@ -7,6 +7,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// NewJSONLogger creates a logrus.Logger that writes pretty-printed JSON
+// to w at the specified level. If level is invalid, it defaults to INFO
+// and logs a warning.
 func NewJSONLogger(w io.Writer, level string) *logrus.Logger {
 	logger := logrus.New()
 	logger.SetOutput(w)

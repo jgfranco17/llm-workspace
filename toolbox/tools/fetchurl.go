@@ -9,6 +9,9 @@ import (
 	"time"
 )
 
+// FetchURL performs an HTTPS GET request for the URL in params["url"]
+// and returns the response body, truncated to MaxOutputSize bytes.
+// Only HTTPS URLs are accepted; non-2xx responses are treated as errors.
 func FetchURL(ctx context.Context, params Parameters) (string, error) {
 	url, err := getRequiredParam(ctx, params, "url")
 	if err != nil {

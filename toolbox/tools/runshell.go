@@ -9,6 +9,9 @@ import (
 	"time"
 )
 
+// RunShellCommand executes params["command"] via sh within the directory
+// given by params["workdir"], with a 30-second timeout. It returns stdout
+// on success or an error wrapping stderr on failure.
 func RunShellCommand(ctx context.Context, params Parameters) (string, error) {
 	command, err := getRequiredParam(ctx, params, "command")
 	if err != nil {
