@@ -4,6 +4,34 @@
 _default:
     @just --list --unsorted
 
+# Set up workspace dependencies
+setup:
+    #!/usr/bin/env bash
+    echo "Setting up workspace dependencies..."
+    if [[ ! -f .envrc ]]; then
+        cp .envrc.example .envrc
+        echo "Created .envrc from example. Please review and customize it as needed."
+    else
+        echo "Found .envrc file, skipping creation."
+        echo "Run 'direnv allow' to load environment variables if you haven't already."
+    fi
+    go mod tidy
+    echo "Workspace setup complete!"
+
+# Build the tools binary for local use
+build-tools:
+    #!/usr/bin/env bash
+    echo "Building tools binary..."
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+        go build -o tool-runner .
+
+# Run tests for the toolbox
+test:
+    #!/usr/bin/env bash
+    echo "Running tests..."
+    go clean -testcache
+    go test -cover ./...
+
 # Setup NVIDIA Container Toolkit for GPU access
 setup-gpu:
     @echo "Setting up NVIDIA Container Toolkit..."
@@ -33,16 +61,16 @@ logs service="":
 # Pull Ollama model manually
 pull-model model="llama3":
     @echo "Pulling Ollama model: {{ model }}"
-    @docker exec ollama ollama pull {{ model }}
+    @docker exec llm-workspace ollama pull {{ model }}
 
 # Initialize Ollama with custom configuration
 init:
     @echo "Running Ollama initialization..."
-    @docker exec ollama /usr/local/bin/init-ollama.sh
+    @docker exec llm-workspace /usr/local/bin/init-ollama.sh
 
 # List currently loaded models
 list-models:
-    @docker exec ollama ollama list
+    @docker exec llm-workspace ollama list
 
 # Check GPU status and availability
 gpu-check:
@@ -50,22 +78,13 @@ gpu-check:
     @nvidia-smi 2>/dev/null || echo "No NVIDIA GPU found on host"
     @echo ""
     @echo "Container GPU access:"
-    @docker exec ollama printenv | grep -i nvidia || echo "NVIDIA env vars not set"
-    @docker exec ollama ls -la /dev | grep -i nvidia 2>/dev/null || echo "No NVIDIA devices in container"
+    @docker exec llm-workspace printenv | grep -i nvidia || echo "NVIDIA env vars not set"
+    @docker exec llm-workspace ls -la /dev | grep -i nvidia 2>/dev/null || echo "No NVIDIA devices in container"
 
 # Run the custom personalized model
 run model="llama-dev":  pull-model init
-    @docker exec -it ollama ollama run {{ model }}
+    @docker exec -it llm-workspace ollama run {{ model }}
 
 # Show the custom model configuration
 show-custom:
-    @docker exec ollama ollama show llama-dev
-
-# Run unit tests
-pytest *args:
-    @uv run pytest {{ args }}
-
-# Lint the workspace
-lint:
-    @uv run black .
-    @uv run isort .
+    @docker exec llm-workspace ollama show llama-dev
